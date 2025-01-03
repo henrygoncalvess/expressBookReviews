@@ -12,8 +12,6 @@ public_users.post("/register", (req,res) => {
     if (!isValid(username)) {
       users.push({ username, password });
 
-      console.log(users);
-
       res.status(200).json({ message: "User successfully registered. Now you can login" });
         
     } else {
