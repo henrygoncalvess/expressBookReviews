@@ -10,8 +10,8 @@ app.use(express.json());
 
 app.use("/customer", session({
     secret:"fingerprint_customer",
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use("/customer", customer_routes);

@@ -45,14 +45,16 @@ regd_users.post("/login", (req,res) => {
     }
 });
 
-regd_users.put("review/:isbn", (req, res) => {
+regd_users.put("/review/:isbn", async (req, res) => {
     try {
         const isbn = req.params.isbn
-        const reviewUsername = req.session.username
+        const bookReviews = await books[isbn].reviews
+        const { username } = req.session.authorization
+        const { review } = req.body
 
-        const bookReview = books[isbn]
-
-        res.status(200).json({name: reviewUsername})
+        bookReviews[username] = review
+        res.status(201).json(bookReviews)
+        
     } catch (error) {
         res.status(400)
         throw error
