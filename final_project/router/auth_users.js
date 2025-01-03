@@ -45,14 +45,14 @@ regd_users.post("/login", (req,res) => {
     }
 });
 
-regd_users.put("/auth/review/:isbn", async (req, res) => {
+regd_users.put("review/:isbn", (req, res) => {
     try {
         const isbn = req.params.isbn
         const reviewUsername = req.session.username
 
         const bookReview = books[isbn]
 
-        res.status(200).json(bookReview)
+        res.status(200).json({name: reviewUsername})
     } catch (error) {
         res.status(400)
         throw error
