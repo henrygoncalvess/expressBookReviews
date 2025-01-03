@@ -45,10 +45,18 @@ regd_users.post("/login", (req,res) => {
     }
 });
 
-// Add a book review
-regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+regd_users.put("/auth/review/:isbn", async (req, res) => {
+    try {
+        const isbn = req.params.isbn
+        const reviewUsername = req.session.username
+
+        const bookReview = books[isbn]
+
+        res.status(200).json(bookReview)
+    } catch (error) {
+        res.status(400)
+        throw error
+    }
 });
 
 module.exports.authenticated = regd_users;
